@@ -1,0 +1,313 @@
+---
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "Cinema Chain API"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "myhajlo.prozorov@gmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+# host: "petstore.swagger.io"
+basePath: "/v1"
+tags:
+- name: "Cinemas"
+  description: ""
+- name: "Movies"
+  description: ""
+schemes:
+- "https"
+- "http"
+paths:
+  /cinemas:
+    get:
+      tags:
+        - "Cinemas"
+      summary: "Get cinemas"
+      description: "Returns a list of cinemas"
+      produces:
+      - "application/xml"
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Cinema"
+    post:
+      tags:
+        - "Cinemas"
+      summary: "Create a cinema"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "body"
+        in: "body"
+        description: "Cinema"
+        required: true
+        schema:
+          $ref: "#/definitions/Cinema"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Cinema"
+        "400":
+          description: "Invalid form"
+  /movies:
+    get:
+      tags:
+        - "Movies"
+      summary: "Get movies"
+      description: "Returns a list of cinemas"
+      produces:
+      - "application/xml"
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Movie"
+    post:
+      tags:
+        - "Movies"
+      summary: "Create a movie"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "body"
+        in: "body"
+        description: "Movie"
+        required: true
+        schema:
+          $ref: "#/definitions/Movie"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Movie"
+        "400":
+          description: "Invalid form"
+  /cinemas/{cinemaId}/showtimes:
+    get:
+      tags:
+        - "Cinemas"
+      summary: "Get showtimes in a cinema"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "cinemaId"
+        in: "path"
+        description: "ID of cinema"
+        required: true
+        type: "integer"
+        format: "int32"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Showtime"
+        "400":
+          description: "Invalid form"
+        "404":
+          description: "Cinema not found"
+  /cinemas/{cinemaId}/screens:
+    get:
+      tags:
+        - "Cinemas"
+      summary: "Get screens in a cinema"
+      description: "Returns a list of cinemas"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "cinemaId"
+        in: "path"
+        description: "ID of screens cinema"
+        required: true
+        type: "integer"
+        format: "int32"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+                $ref: "#/definitions/Screen"
+        "404":
+          description: "Cinema not found"
+    post:
+      tags:
+        - "Cinemas"
+      summary: "Create a screen in a cinema"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "cinemaId"
+        in: "path"
+        description: "ID of screen"
+        required: true
+        type: "integer"
+        format: "int32"
+      - name: "body"
+        in: "body"
+        description: "Screen"
+        required: true
+        schema:
+          $ref: "#/definitions/Screen"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Screen"
+        "400":
+          description: "Invalid form"
+        "404":
+          description: "Screen not found"
+  /cinemas/{cinemaId}/screens/{screenId}/showtimes:
+    get:
+      tags:
+        - "Cinemas"
+      summary: "Get showtimes in a cinema screen"
+      description: "Returns a list of cinemas"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "cinemaId"
+        in: "path"
+        description: "ID of cinema"
+        required: true
+        type: "integer"
+        format: "int32"
+      - name: "screenId"
+        in: "path"
+        description: "ID of screen"
+        required: true
+        type: "integer"
+        format: "int32"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Showtime"
+        "404":
+          description: "Cinema or screen not found"
+    post:
+      tags:
+        - "Cinemas"
+      summary: "Create a showtime in a cinema screen"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "cinemaId"
+        in: "path"
+        description: "ID of cinema"
+        required: true
+        type: "integer"
+        format: "int32"
+      - name: "screenId"
+        in: "path"
+        description: "ID of screen"
+        required: true
+        type: "integer"
+        format: "int32"
+      - name: "body"
+        in: "body"
+        description: "Showtime"
+        required: true
+        schema:
+          $ref: "#/definitions/Showtime"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Showtime"
+        "400":
+          description: "Invalid form"
+        "404":
+          description: "Cinema or screen not found"
+definitions:
+  Cinema:
+    type: "object"
+    required:
+    - "name"
+    - "city"
+    properties:
+      id:
+        type: "integer"
+        format: "int32"
+      name:
+        type: "string"
+      city:
+        type: "string"
+  Screen:
+    type: "object"
+    required:
+    - "cinemaId"
+    - "name"
+    properties:
+      id:
+        type: "integer"
+        format: "int32"
+      name:
+        type: "string"
+      cinemaId:
+        type: "integer"
+        format: "int32"
+      capacity:
+        type: "integer"
+        format: "int32"
+  Movie:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      id:
+        type: "integer"
+        format: "int32"
+      name:
+        type: "string"
+      year:
+        type: "integer"
+        format: "int32"
+      duration:
+        type: "integer"
+        format: "int32"
+  Showtime:
+    type: "object"
+    required:
+    - "movieId"
+    - "screenId"
+    - "startOn"
+    properties:
+      id:
+        type: "integer"        
+        format: "int32"
+      movieId:
+        type: "integer"
+        format: "int32"
+      screenId:
+        type: "integer"
+        format: "int32"
+      startOn:
+        type: "string"
+        format: "date-time"
+    example:
+      id: 0
+      movieId: 0
+      screenId: 0
+      startOn: "2000-01-23T04:56:07.000+00:00"
