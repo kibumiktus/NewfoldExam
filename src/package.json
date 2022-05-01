@@ -1,0 +1,27 @@
+{
+  "name": "newfoldexam",
+  "version": "1.0.0",
+  "description": "Newfold Test Task",
+  "main": "index.js",
+  "scripts": {
+    "prestart": "npm install",
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kibumiktus/NewfoldExam.git"
+  },
+  "author": "Mykhailo Prozorov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kibumiktus/NewfoldExam/issues"
+  },
+  "homepage": "https://github.com/kibumiktus/NewfoldExam#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "js-yaml": "^4.1.0",
+    "swagger-tools": "^0.10.4",
+    "swagger-ui-express": "^4.3.0"
+  }
+}
