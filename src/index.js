@@ -1,12 +1,29 @@
+const bodyParser = require('body-parser')
 const express = require('express')
-const app = express()
 const swaggerUi = require('swagger-ui-express')
-const swaggerDocument = require("./api/swaggerDocument.js");
-const port = 8080
-app.get('/v1/cinemas',(req,res)=>{
-    res.send({"zz":1})
-})
+
+const { apiRoot, port } = require('./config')
+const swaggerDocument = require("./api/swaggerDocument");
+
+const cinemaController = require("./controllers/cinema")
+const movieController = require("./controllers/movie")
+const showtimeController = require("./controllers/showtime")
+const screenController = require("./controllers/screen")
+
+const app = express()
+app.use(bodyParser.urlencoded({extended:false}))
+app.use(bodyParser.json())
+
+app.get(`${apiRoot}/cinemas`, cinemaController.getCinemas)
+app.post(`${apiRoot}/cinemas`, cinemaController.createCinema)
+app.get(`${apiRoot}/movies`, movieController.getMovies)
+app.post(`${apiRoot}/movies`, movieController.createMovie)
+app.get(`${apiRoot}/cinemas/:cinemaId/showtimes`, showtimeController.getShowtimesByCinema)
+app.get(`${apiRoot}/cinemas/:cinemaId/screens`, screenController.getScreens)
+app.post(`${apiRoot}/cinemas/:cinemaId/screens`, screenController.createScreen)
+app.get(`${apiRoot}/cinemas/:cinemaId/screens/:screenId/showtimes`, showtimeController.getShowtimesByScreen)
+app.post(`${apiRoot}/cinemas/:cinemaId/screens/:screenId/showtimes`, showtimeController.createShowtime)
 app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 app.listen(port, () => {
     console.log(`App listening on port ${port}`)
-  })
+})
