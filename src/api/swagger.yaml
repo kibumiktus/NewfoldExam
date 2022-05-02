@@ -17,7 +17,7 @@ tags:
 - name: "Movies"
   description: ""
 schemes:
-- "https"
+# - "https"
 - "http"
 paths:
   /cinemas:
@@ -27,7 +27,7 @@ paths:
       summary: "Get cinemas"
       description: "Returns a list of cinemas"
       produces:
-      - "application/xml"
+      # - "application/xml"
       - "application/json"
       responses:
         "200":
@@ -41,7 +41,7 @@ paths:
         - "Cinemas"
       summary: "Create a cinema"
       produces:
-      - "application/xml"
+      # - "application/xml"
       - "application/json"
       parameters:
       - name: "body"
@@ -64,7 +64,7 @@ paths:
       summary: "Get movies"
       description: "Returns a list of cinemas"
       produces:
-      - "application/xml"
+      # - "application/xml"
       - "application/json"
       responses:
         "200":
@@ -78,7 +78,7 @@ paths:
         - "Movies"
       summary: "Create a movie"
       produces:
-      - "application/xml"
+      # - "application/xml"
       - "application/json"
       parameters:
       - name: "body"
@@ -100,7 +100,7 @@ paths:
         - "Cinemas"
       summary: "Get showtimes in a cinema"
       produces:
-      - "application/xml"
+      # - "application/xml"
       - "application/json"
       parameters:
       - name: "cinemaId"
@@ -127,7 +127,7 @@ paths:
       summary: "Get screens in a cinema"
       description: "Returns a list of cinemas"
       produces:
-      - "application/xml"
+      # - "application/xml"
       - "application/json"
       parameters:
       - name: "cinemaId"
@@ -150,7 +150,7 @@ paths:
         - "Cinemas"
       summary: "Create a screen in a cinema"
       produces:
-      - "application/xml"
+      # - "application/xml"
       - "application/json"
       parameters:
       - name: "cinemaId"
@@ -181,7 +181,7 @@ paths:
       summary: "Get showtimes in a cinema screen"
       description: "Returns a list of cinemas"
       produces:
-      - "application/xml"
+      # - "application/xml"
       - "application/json"
       parameters:
       - name: "cinemaId"
@@ -210,7 +210,7 @@ paths:
         - "Cinemas"
       summary: "Create a showtime in a cinema screen"
       produces:
-      - "application/xml"
+      # - "application/xml"
       - "application/json"
       parameters:
       - name: "cinemaId"
@@ -254,6 +254,10 @@ definitions:
         type: "string"
       city:
         type: "string"
+    example:
+      id: 0
+      name: "Oscar Olimp"
+      city: "Kyiv"
   Screen:
     type: "object"
     required:
@@ -271,6 +275,11 @@ definitions:
       capacity:
         type: "integer"
         format: "int32"
+    example:
+      id: 0
+      name: "Red"
+      cinemaId: 18
+      capacity: 134
   Movie:
     type: "object"
     required:
@@ -287,6 +296,11 @@ definitions:
       duration:
         type: "integer"
         format: "int32"
+    example:
+      id: 0
+      name: "Warcraft II"
+      year: 2018
+      duration: 134
   Showtime:
     type: "object"
     required:
@@ -295,7 +309,7 @@ definitions:
     - "startOn"
     properties:
       id:
-        type: "integer"        
+        type: "integer"
         format: "int32"
       movieId:
         type: "integer"

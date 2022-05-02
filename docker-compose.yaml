@@ -5,7 +5,8 @@ services:
     restart: on-failure:3
     ports:
       - "8080:8080"
+    env_file:
+     - ./.env
     volumes:
       - ./src:/app
-    # networks:
-    #   - app-network
+
