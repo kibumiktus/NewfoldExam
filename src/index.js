@@ -3,12 +3,13 @@ const express = require('express')
 const swaggerUi = require('swagger-ui-express')
 
 const { apiRoot, port } = require('./config')
-const swaggerDocument = require("./api/swaggerDocument");
-
-const cinemaController = require("./controllers/cinema")
-const movieController = require("./controllers/movie")
-const showtimeController = require("./controllers/showtime")
-const screenController = require("./controllers/screen")
+const swaggerDocument = require("./api/swaggerDocument")
+const {
+    cinema: cinemaController,
+    movie: movieController,
+    showtime: showtimeController,
+    screen: screenController
+} = require("./controllers/")
 
 const app = express()
 app.use(bodyParser.urlencoded({extended:false}))

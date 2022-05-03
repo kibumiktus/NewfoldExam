@@ -1,4 +1,4 @@
-const { CinemaModel } = require("./mongoConnection");
+const { CinemaModel } = require("./mongoConnection")
 let maxIdValue = 0
 async function createCinema(cinema) {
     var model = Object.assign({}, cinema, { "id": ++maxIdValue })

@@ -1,4 +1,4 @@
-const { ShowtimeModel } = require("./mongoConnection");
+const { ShowtimeModel } = require("./mongoConnection")
 let maxIdValue = 0
 async function createShowtime(showtime) {
     var model = Object.assign({}, showtime, { "id": ++maxIdValue })
