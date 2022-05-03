@@ -7,6 +7,25 @@ services:
       - "8080:8080"
     env_file:
      - ./.env
-    volumes:
-      - ./src:/app
+    # volumes:
+    #   - ./src:/app
+    depends_on:
+      - mongo
 
+  mongo:
+    image: mongo
+    restart: on-failure:3
+    ports:
+      - 27017:27017
+    env_file:
+      - ./mongo.env
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    env_file:
+      - ./express.env
+    depends_on:
+      - mongo
