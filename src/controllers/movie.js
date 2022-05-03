@@ -1,16 +1,20 @@
 const status = require("http-status")
 const movieValidator = require("../validators/movie")
-async function getMovies(req, res) {
+const movieRepository = require("../db/movieRepository")
 
+async function getMovies(req, res) {
+    const storedModel = await movieRepository.getMovies()
+    res.json(storedModel)
 }
 async function createMovie(req, res) {
-    let model = req.body;
-    const { error, value } = movieValidator.validate(model);
+    let inputModel = req.body;
+    const { error, value } = movieValidator.validate(inputModel);
     if (error) {
         res.status(status['UNPROCESSABLE_ENTITY'])
-        res.json( { error:error.message } )
+        res.json( { error: error.message } )
     } else {
-        res.json({ok:true})
+        const storedModel = await movieRepository.createMovie(value)
+        res.json(storedModel)
     }
 }
 module.exports = { getMovies, createMovie };

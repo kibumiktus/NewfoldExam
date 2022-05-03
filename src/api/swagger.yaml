@@ -3,13 +3,11 @@ swagger: "2.0"
 info:
   version: "1.0.0"
   title: "Cinema Chain API"
-  termsOfService: "http://swagger.io/terms/"
   contact:
     email: "myhajlo.prozorov@gmail.com"
   license:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-# host: "petstore.swagger.io"
 basePath: "/v1"
 tags:
 - name: "Cinemas"
@@ -17,7 +15,6 @@ tags:
 - name: "Movies"
   description: ""
 schemes:
-# - "https"
 - "http"
 paths:
   /cinemas:
@@ -27,7 +24,6 @@ paths:
       summary: "Get cinemas"
       description: "Returns a list of cinemas"
       produces:
-      # - "application/xml"
       - "application/json"
       responses:
         "200":
@@ -41,7 +37,6 @@ paths:
         - "Cinemas"
       summary: "Create a cinema"
       produces:
-      # - "application/xml"
       - "application/json"
       parameters:
       - name: "body"
@@ -64,7 +59,6 @@ paths:
       summary: "Get movies"
       description: "Returns a list of cinemas"
       produces:
-      # - "application/xml"
       - "application/json"
       responses:
         "200":
@@ -78,7 +72,6 @@ paths:
         - "Movies"
       summary: "Create a movie"
       produces:
-      # - "application/xml"
       - "application/json"
       parameters:
       - name: "body"
@@ -100,7 +93,6 @@ paths:
         - "Cinemas"
       summary: "Get showtimes in a cinema"
       produces:
-      # - "application/xml"
       - "application/json"
       parameters:
       - name: "cinemaId"
@@ -109,6 +101,12 @@ paths:
         required: true
         type: "integer"
         format: "int32"
+      - name: "startOn"
+        in: "query"
+        description: "date of showtimes"
+        required: true
+        type: "string"
+        format: "date-time"
       responses:
         "200":
           description: "successful operation"
@@ -127,7 +125,6 @@ paths:
       summary: "Get screens in a cinema"
       description: "Returns a list of cinemas"
       produces:
-      # - "application/xml"
       - "application/json"
       parameters:
       - name: "cinemaId"
@@ -150,7 +147,6 @@ paths:
         - "Cinemas"
       summary: "Create a screen in a cinema"
       produces:
-      # - "application/xml"
       - "application/json"
       parameters:
       - name: "cinemaId"
@@ -181,7 +177,6 @@ paths:
       summary: "Get showtimes in a cinema screen"
       description: "Returns a list of cinemas"
       produces:
-      # - "application/xml"
       - "application/json"
       parameters:
       - name: "cinemaId"
@@ -196,6 +191,12 @@ paths:
         required: true
         type: "integer"
         format: "int32"
+      - name: "startOn"
+        in: "query"
+        description: "date of showtimes"
+        required: true
+        type: "string"
+        format: "date-time"
       responses:
         "200":
           description: "successful operation"
@@ -210,7 +211,6 @@ paths:
         - "Cinemas"
       summary: "Create a showtime in a cinema screen"
       produces:
-      # - "application/xml"
       - "application/json"
       parameters:
       - name: "cinemaId"
