@@ -1,5 +1,5 @@
 const status = require("http-status")
-const movieValidator = require("../validators/movie")
+const { movie: movieValidator } = require("../validators")
 const movieRepository = require("../db/movieRepository")
 
 async function getMovies(req, res) {
@@ -7,8 +7,8 @@ async function getMovies(req, res) {
     res.json(storedModel)
 }
 async function createMovie(req, res) {
-    let inputModel = req.body;
-    const { error, value } = movieValidator.validate(inputModel);
+    let inputModel = req.body
+    const { error, value } = movieValidator.validate(inputModel)
     if (error) {
         res.status(status['UNPROCESSABLE_ENTITY'])
         res.json( { error: error.message } )
@@ -17,4 +17,4 @@ async function createMovie(req, res) {
         res.json(storedModel)
     }
 }
-module.exports = { getMovies, createMovie };
+module.exports = { getMovies, createMovie }

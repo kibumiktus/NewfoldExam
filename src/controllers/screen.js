@@ -1,5 +1,5 @@
 const status = require("http-status")
-const screenValidator = require("../validators/screen")
+const { screen: screenValidator } = require("../validators")
 const screenRepository = require("../db/screenRepository")
 
 async function getScreens(req, res) {
@@ -8,8 +8,8 @@ async function getScreens(req, res) {
 }
 
 async function createScreen(req, res) {
-    let inputModel = req.body;
-    const { error, value } = screenValidator.validate(inputModel);
+    let inputModel = req.body
+    const { error, value } = screenValidator.validate(inputModel)
     if (error) {
         res.status(status['UNPROCESSABLE_ENTITY'])
         res.json( { error: error.message } )
@@ -18,4 +18,4 @@ async function createScreen(req, res) {
         res.json(storedModel)
     }
 }
-module.exports = { getScreens,createScreen };
+module.exports = { getScreens,createScreen }

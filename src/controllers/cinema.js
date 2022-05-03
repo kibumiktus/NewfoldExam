@@ -1,13 +1,13 @@
 const status = require("http-status")
-const cinemaValidator = require("../validators/cinema")
+const { cinema: cinemaValidator } = require("../validators")
 const cinemaRepository = require("../db/cinemaRepository")
 async function getCinemas(req, res) {
     const storedModel = await cinemaRepository.getCinemas()
     res.json(storedModel)
 }
 async function createCinema(req, res) {
-    const inputModel = req.body;
-    const { error, value } = cinemaValidator.validate(inputModel);
+    const inputModel = req.body
+    const { error, value } = cinemaValidator.validate(inputModel)
     if (error) {
         res.status(status['UNPROCESSABLE_ENTITY'])
         res.json({error: error.message})
@@ -16,4 +16,4 @@ async function createCinema(req, res) {
         res.json(storedModel)
     }
 }
-module.exports = { getCinemas, createCinema };
+module.exports = { getCinemas, createCinema }

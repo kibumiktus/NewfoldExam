@@ -1,5 +1,5 @@
 const status = require("http-status")
-const showtimeValidator = require("../validators/showtime")
+const { showtime: showtimeValidator } = require("../validators")
 const showtimeRepository = require("../db/showtimeRepository")
 
 async function getShowtimesByCinema(req, res) {
@@ -11,8 +11,8 @@ async function getShowtimesByScreen(req, res) {
     res.json(storedModel)
 }
 async function createShowtime(req, res) {
-    let inputModel = req.body;
-    const { error, value } = showtimeValidator.validate(inputModel);
+    let inputModel = req.body
+    const { error, value } = showtimeValidator.validate(inputModel)
     if (error) {
         res.status(status['UNPROCESSABLE_ENTITY'])
         res.json( { error: error.message } )
@@ -21,4 +21,4 @@ async function createShowtime(req, res) {
         res.json(storedModel)
     }
 }
-module.exports = { getShowtimesByCinema, getShowtimesByScreen, createShowtime };
+module.exports = { getShowtimesByCinema, getShowtimesByScreen, createShowtime }
